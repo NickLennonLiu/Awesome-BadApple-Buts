@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-05-15T10:57:13.455Z",
+  "sourceVideos": 920,
+  "totalVideos": 874,
+  "titleMatchedVideos": 838,
+  "removedUnavailableVideos": 46,
+  "sourcePlaylists": 16,
+  "categories": [
+    {
+      "id": "other_recreation",
+      "label": "创意复刻",
+      "labelZh": "创意复刻",
+      "labelEn": "Creative recreation",
+      "count": 497
+    },
+    {
+      "id": "ai_or_voice_cover",
+      "label": "翻唱与声音",
+      "labelZh": "翻唱与声音",
+      "labelEn": "Covers and audio",
+      "count": 105
+    },
+    {
+      "id": "game_or_game_engine",
+      "label": "游戏与引擎",
+      "labelZh": "游戏与引擎",
+      "labelEn": "Games and engines",
+      "count": 85
+    },
+    {
+      "id": "hardware_physical",
+      "label": "硬件与实体设备",
+      "labelZh": "硬件与实体设备",
+      "labelEn": "Hardware and physical devices",
+      "count": 75
+    },
+    {
+      "id": "fandom_animation",
+      "label": "同人与动画",
+      "labelZh": "同人与动画",
+      "labelEn": "Fandom and animation",
+      "count": 56
+    },
+    {
+      "id": "software_platform",
+      "label": "软件平台",
+      "labelZh": "软件平台",
+      "labelEn": "Software platforms",
+      "count": 42
+    },
+    {
+      "id": "meta_compilation",
+      "label": "合辑与元编辑",
+      "labelZh": "合辑与元编辑",
+      "labelEn": "Compilations and meta edits",
+      "count": 14
+    }
+  ]
+}
