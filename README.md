@@ -37,7 +37,7 @@ One-shot repo setup with GitHub CLI:
 git init
 git add .
 git commit -m "Initial video gallery"
-gh repo create video-gallery --public --source=. --remote=origin --push
+gh repo create Bad-Apple-Buts --public --source=. --remote=origin --push
 ```
 
 ## Data
