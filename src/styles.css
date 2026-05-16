@@ -332,7 +332,11 @@ main {
   -webkit-backdrop-filter: blur(12px);
 }
 
-.tab-nav button {
+.tab-nav button,
+.tab-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 132px;
   min-height: 40px;
   padding: 0 18px;
@@ -347,7 +351,8 @@ main {
   transition: color 180ms ease, background 180ms ease;
 }
 
-.tab-nav button:hover {
+.tab-nav button:hover,
+.tab-nav a:hover {
   color: var(--text);
 }
 

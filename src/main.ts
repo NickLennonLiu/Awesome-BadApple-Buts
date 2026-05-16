@@ -18,6 +18,9 @@ type Summary = {
   titleMatchedVideos: number;
   removedUnavailableVideos: number;
   sourcePlaylists: number;
+  externalSourceVideos: number;
+  externalOnlyVideos: number;
+  needsReviewVideos: number;
   categories: CategorySummary[];
 };
 
@@ -61,6 +64,14 @@ type Video = {
   playlistCount: number;
   playlistTitles: string[];
   titleMatchesBadApple: boolean;
+  classificationConfidence: string;
+  classificationStatus: string;
+  classificationNotes: string;
+  externalOnly: boolean;
+  metadataStatus: string;
+  externalSourceCount: number;
+  externalSourceTitles: string[];
+  externalSourceRepos: string[];
 };
 
 type SortMode = "featured" | "views" | "playlists" | "duration" | "title";
@@ -82,6 +93,7 @@ const text = {
     sourceStat: "来源列表",
     videosTab: "视频",
     aboutTab: "关于",
+    classifyTab: "分类标注",
     searchLabel: "搜索",
     searchPlaceholder: "标题、频道、播放列表",
     categoryLabel: "分类",
@@ -123,6 +135,7 @@ const text = {
     sourceStat: "Source playlists",
     videosTab: "Videos",
     aboutTab: "About",
+    classifyTab: "Classification",
     searchLabel: "Search",
     searchPlaceholder: "Title, channel, playlist",
     categoryLabel: "Category",
@@ -292,6 +305,7 @@ function renderShell() {
       <nav class="tab-nav" aria-label="sections">
         <button class="${state.page === "videos" ? "active" : ""}" data-page="videos" type="button">${t("videosTab")}</button>
         <button class="${state.page === "about" ? "active" : ""}" data-page="about" type="button">${t("aboutTab")}</button>
+        <a href="./classify.html">${t("classifyTab")}</a>
       </nav>
       <div id="page-root"></div>
       <footer class="site-footer">

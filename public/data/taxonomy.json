@@ -1,0 +1,51 @@
+[
+  {
+    "id": "software",
+    "labelZh": "软件",
+    "labelEn": "Software",
+    "descriptionZh": "网页、应用、操作系统、游戏、可视化算法和其他软件平台里的 Bad Apple!!。",
+    "descriptionEn": "Bad Apple!! implemented in websites, apps, operating systems, games, algorithms, and other software platforms."
+  },
+  {
+    "id": "hardware",
+    "labelZh": "硬件",
+    "labelEn": "Hardware",
+    "descriptionZh": "显示器、电子器件、复古设备、外设、控制器和其他实体硬件实现。",
+    "descriptionEn": "Displays, electronic parts, vintage machines, peripherals, controllers, and other physical hardware implementations."
+  },
+  {
+    "id": "audio",
+    "labelZh": "音频",
+    "labelEn": "Audio",
+    "descriptionZh": "翻唱、演奏、编曲、MIDI、AI 声音和偏音频侧的实现。",
+    "descriptionEn": "Covers, performances, arrangements, MIDI, AI vocals, and audio-focused implementations."
+  },
+  {
+    "id": "real_world",
+    "labelZh": "现实物体",
+    "labelEn": "Real-world objects",
+    "descriptionZh": "自然物、食物、纸张、手绘、定格动画和非电子实体材料。",
+    "descriptionEn": "Nature, food, paper, drawing, stop motion, and non-electronic physical materials."
+  },
+  {
+    "id": "animation",
+    "labelZh": "动画与同人",
+    "labelEn": "Animation and fandom",
+    "descriptionZh": "PV、影绘、MMD、同人动画、字幕视频和角色相关二创。",
+    "descriptionEn": "PV, shadow art, MMD, fan animation, lyric videos, and character-focused derivative works."
+  },
+  {
+    "id": "meta",
+    "labelZh": "合辑与元玩法",
+    "labelEn": "Compilations and meta",
+    "descriptionZh": "合辑、逐帧切换、多版本混剪、递归和以 Bad Apple!! 传播本身为对象的作品。",
+    "descriptionEn": "Compilations, frame switching, multi-version edits, recursive works, and pieces about the meme itself."
+  },
+  {
+    "id": "unclassified",
+    "labelZh": "待确认",
+    "labelEn": "Needs review",
+    "descriptionZh": "自动规则没有足够信号，需要人工确认的条目。",
+    "descriptionEn": "Entries where automatic rules do not have enough signal and need manual review."
+  }
+]

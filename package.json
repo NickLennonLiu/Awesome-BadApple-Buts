@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "classify:data": "node scripts/classify-videos.mjs",
+    "estimate:sizes": "node scripts/estimate-download-sizes.mjs",
     "prepare:data": "node scripts/build-data.mjs",
+    "refresh:data": "npm run classify:data && npm run prepare:data",
     "dev": "npm run prepare:data && vite --host 0.0.0.0",
     "build": "npm run prepare:data && tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0"

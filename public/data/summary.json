@@ -1,59 +1,55 @@
 {
-  "generatedAt": "2026-05-15T11:37:02.534Z",
-  "sourceVideos": 920,
-  "totalVideos": 874,
-  "titleMatchedVideos": 838,
-  "removedUnavailableVideos": 46,
+  "generatedAt": "2026-05-16T04:26:23.348Z",
+  "sourceVideos": 938,
+  "totalVideos": 890,
+  "titleMatchedVideos": 840,
+  "removedUnavailableVideos": 48,
   "sourcePlaylists": 16,
+  "externalSourceVideos": 74,
+  "externalOnlyVideos": 16,
+  "needsReviewVideos": 52,
   "categories": [
     {
-      "id": "other_recreation",
-      "label": "创意复刻",
-      "labelZh": "创意复刻",
-      "labelEn": "Creative recreation",
-      "count": 497
+      "id": "animation",
+      "label": "动画与同人",
+      "labelZh": "动画与同人",
+      "labelEn": "Animation and fandom",
+      "count": 447
     },
     {
-      "id": "ai_or_voice_cover",
-      "label": "翻唱与声音",
-      "labelZh": "翻唱与声音",
-      "labelEn": "Covers and audio",
-      "count": 105
+      "id": "software",
+      "label": "软件",
+      "labelZh": "软件",
+      "labelEn": "Software",
+      "count": 179
     },
     {
-      "id": "game_or_game_engine",
-      "label": "游戏与引擎",
-      "labelZh": "游戏与引擎",
-      "labelEn": "Games and engines",
-      "count": 85
+      "id": "audio",
+      "label": "音频",
+      "labelZh": "音频",
+      "labelEn": "Audio",
+      "count": 141
     },
     {
-      "id": "hardware_physical",
-      "label": "硬件与实体设备",
-      "labelZh": "硬件与实体设备",
-      "labelEn": "Hardware and physical devices",
-      "count": 75
+      "id": "hardware",
+      "label": "硬件",
+      "labelZh": "硬件",
+      "labelEn": "Hardware",
+      "count": 94
     },
     {
-      "id": "fandom_animation",
-      "label": "同人与动画",
-      "labelZh": "同人与动画",
-      "labelEn": "Fandom and animation",
-      "count": 56
+      "id": "meta",
+      "label": "合辑与元玩法",
+      "labelZh": "合辑与元玩法",
+      "labelEn": "Compilations and meta",
+      "count": 20
     },
     {
-      "id": "software_platform",
-      "label": "软件平台",
-      "labelZh": "软件平台",
-      "labelEn": "Software platforms",
-      "count": 42
-    },
-    {
-      "id": "meta_compilation",
-      "label": "合辑与元编辑",
-      "labelZh": "合辑与元编辑",
-      "labelEn": "Compilations and meta edits",
-      "count": 14
+      "id": "real_world",
+      "label": "现实物体",
+      "labelZh": "现实物体",
+      "labelEn": "Real-world objects",
+      "count": 9
     }
   ]
 }

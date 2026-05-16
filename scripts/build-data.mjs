@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const outputDir = path.resolve(root, "public", "data");
+const taxonomyPath = path.resolve(root, "data", "classification-taxonomy.json");
+const externalSourcesPath = path.resolve(root, "data", "external-awesome-sources.json");
 
 const requiredSourceFiles = ["videos.json", "playlists.json"];
 const configuredDataDir = process.env.BAD_APPLE_YOUTUBE_DATA_DIR
@@ -35,16 +37,6 @@ async function findSourceDir() {
     ].join("\n")
   );
 }
-
-const categoryLabels = {
-  other_recreation: { zh: "创意复刻", en: "Creative recreation" },
-  ai_or_voice_cover: { zh: "翻唱与声音", en: "Covers and audio" },
-  game_or_game_engine: { zh: "游戏与引擎", en: "Games and engines" },
-  hardware_physical: { zh: "硬件与实体设备", en: "Hardware and physical devices" },
-  fandom_animation: { zh: "同人与动画", en: "Fandom and animation" },
-  software_platform: { zh: "软件平台", en: "Software platforms" },
-  meta_compilation: { zh: "合辑与元编辑", en: "Compilations and meta edits" }
-};
 
 function compactNumber(value, locale = "zh-CN") {
   const number = Number(value);
@@ -106,10 +98,24 @@ const sourcePath = path.join(sourceDir, "videos.json");
 const playlistsPath = path.join(sourceDir, "playlists.json");
 const rawVideos = JSON.parse(await readFile(sourcePath, "utf8"));
 const rawPlaylists = JSON.parse(await readFile(playlistsPath, "utf8"));
+const taxonomy = JSON.parse(await readFile(taxonomyPath, "utf8"));
+const externalSources = JSON.parse(await readFile(externalSourcesPath, "utf8"));
+const categoryLabels = Object.fromEntries(
+  taxonomy.map((category) => [
+    category.id,
+    {
+      zh: category.labelZh,
+      en: category.labelEn,
+      descriptionZh: category.descriptionZh,
+      descriptionEn: category.descriptionEn
+    }
+  ])
+);
 const availableRawVideos = rawVideos.filter((video) => !isUnavailable(video));
 const videos = availableRawVideos.map((video) => {
   const playlists = splitList(video.playlist_titles);
   const labels = categoryLabels[video.category] || { zh: "未分类", en: "Uncategorized" };
+  const externalSourceTitles = splitList(video.external_source_titles);
   return {
     id: video.video_id,
     url: video.video_url,
@@ -132,7 +138,15 @@ const videos = availableRawVideos.map((video) => {
     viewLabelEn: compactNumber(video.view_count, "en-US"),
     playlistCount: Number(video.playlist_count) || playlists.length,
     playlistTitles: playlists,
-    titleMatchesBadApple: video.title_matches_bad_apple === "yes"
+    titleMatchesBadApple: video.title_matches_bad_apple === "yes",
+    classificationConfidence: video.classification_confidence || "medium",
+    classificationStatus: video.classification_status || "auto",
+    classificationNotes: video.classification_notes || "",
+    externalOnly: video.external_only === "yes",
+    metadataStatus: video.metadata_status || "",
+    externalSourceCount: Number(video.external_source_count) || externalSourceTitles.length,
+    externalSourceTitles,
+    externalSourceRepos: splitList(video.external_source_repos)
   };
 });
 
@@ -180,6 +194,9 @@ const summary = {
   titleMatchedVideos: videos.filter((video) => video.titleMatchesBadApple).length,
   removedUnavailableVideos: rawVideos.length - availableRawVideos.length,
   sourcePlaylists: playlists.length,
+  externalSourceVideos: videos.filter((video) => video.externalSourceCount > 0).length,
+  externalOnlyVideos: videos.filter((video) => video.externalOnly).length,
+  needsReviewVideos: videos.filter((video) => video.classificationStatus === "needs_review").length,
   categories
 };
 
@@ -187,6 +204,8 @@ await mkdir(outputDir, { recursive: true });
 await writeFile(path.join(outputDir, "videos.json"), `${JSON.stringify(videos, null, 2)}\n`);
 await writeFile(path.join(outputDir, "playlists.json"), `${JSON.stringify(playlists, null, 2)}\n`);
 await writeFile(path.join(outputDir, "summary.json"), `${JSON.stringify(summary, null, 2)}\n`);
+await writeFile(path.join(outputDir, "taxonomy.json"), `${JSON.stringify(taxonomy, null, 2)}\n`);
+await writeFile(path.join(outputDir, "external-sources.json"), `${JSON.stringify(externalSources, null, 2)}\n`);
 
 console.log(`Generated ${videos.length} videos into ${path.relative(process.cwd(), outputDir)}`);
 console.log(`Source data: ${path.relative(process.cwd(), sourceDir) || "."}`);

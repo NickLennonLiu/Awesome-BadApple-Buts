@@ -1,0 +1,148 @@
+{
+  "generatedAt": "2026-05-16T02:11:24.181Z",
+  "publicVideoCount": 890,
+  "knownDurationCount": 874,
+  "unknownDurationCount": 16,
+  "knownDurationSeconds": 204987,
+  "knownDurationHours": 56.94,
+  "medianDurationSeconds": 224,
+  "imputedDurationSeconds": 208571,
+  "imputedDurationHours": 57.94,
+  "downloadAttempt": {
+    "attemptedTopVideos": 10,
+    "sampleDir": "data/runs/download-sample",
+    "downloadedFileCount": 0,
+    "downloadedFiles": [],
+    "botCheckFailures": 10,
+    "logFile": "data/runs/download-sample/yt-dlp-download.log"
+  },
+  "topTen": [
+    {
+      "video_id": "FtutLA63Cp8",
+      "title": "【東方】Bad Apple!! ＰＶ【影絵】",
+      "url": "https://www.youtube.com/watch?v=FtutLA63Cp8",
+      "view_count": 128000000,
+      "duration_seconds": 220,
+      "downloaded": false
+    },
+    {
+      "video_id": "9lNZ_Rnr7Jc",
+      "title": "Bad Apple!! - Full Version w/video [Lyrics in Romaji, Translation in English]",
+      "url": "https://www.youtube.com/watch?v=9lNZ_Rnr7Jc",
+      "view_count": 44000000,
+      "duration_seconds": 325,
+      "downloaded": false
+    },
+    {
+      "video_id": "9Xz4NV0zsbY",
+      "title": "BAD APPLE!! || METAL COVER by RichaadEB ft. Cristina Vee",
+      "url": "https://www.youtube.com/watch?v=9Xz4NV0zsbY",
+      "view_count": 35000000,
+      "duration_seconds": 311,
+      "downloaded": false
+    },
+    {
+      "video_id": "rQg2qngyIZM",
+      "title": "Bad Apple!! (English Cover)【JubyPhonic】",
+      "url": "https://www.youtube.com/watch?v=rQg2qngyIZM",
+      "view_count": 26000000,
+      "duration_seconds": 229,
+      "downloaded": false
+    },
+    {
+      "video_id": "VBtTL_IsZ5k",
+      "title": "【Touhou】 -Bad Apple!!- (Orchestral Arrangement) feat. Un3h",
+      "url": "https://www.youtube.com/watch?v=VBtTL_IsZ5k",
+      "view_count": 22000000,
+      "duration_seconds": 351,
+      "downloaded": false
+    },
+    {
+      "video_id": "ThHvx5a9IYA",
+      "title": "[HD|60FPS] Bad Apple!! [Shadow Art PV]",
+      "url": "https://www.youtube.com/watch?v=ThHvx5a9IYA",
+      "view_count": 21000000,
+      "duration_seconds": 220,
+      "downloaded": false
+    },
+    {
+      "video_id": "_qmqW2EOZzg",
+      "title": "Seal rapidly smacking itself",
+      "url": "https://www.youtube.com/watch?v=_qmqW2EOZzg",
+      "view_count": 19000000,
+      "duration_seconds": 16,
+      "downloaded": false
+    },
+    {
+      "video_id": "IltRgZW2Jcw",
+      "title": "Synthesia bad apple",
+      "url": "https://www.youtube.com/watch?v=IltRgZW2Jcw",
+      "view_count": 16000000,
+      "duration_seconds": 343,
+      "downloaded": false
+    },
+    {
+      "video_id": "dx76YPgZviE",
+      "title": "【BadApple!!】傷林果 【ShouRinka】",
+      "url": "https://www.youtube.com/watch?v=dx76YPgZviE",
+      "view_count": 15000000,
+      "duration_seconds": 313,
+      "downloaded": false
+    },
+    {
+      "video_id": "v-fc1zv31zE",
+      "title": "Bad Apple!! feat.SEKAI / 25時、ナイトコードで。 × 初音ミク",
+      "url": "https://www.youtube.com/watch?v=v-fc1zv31zE",
+      "view_count": 14000000,
+      "duration_seconds": 232,
+      "downloaded": false
+    }
+  ],
+  "estimates": [
+    {
+      "id": "worst_144p",
+      "label": "最低品质 / 144p 级",
+      "assumedKbps": 200,
+      "estimatedKnownDurationGiB": 4.77,
+      "estimatedWithMedianImputationGiB": 4.86,
+      "estimatedPerFourMinuteVideoMiB": 5.7
+    },
+    {
+      "id": "360p",
+      "label": "360p",
+      "assumedKbps": 600,
+      "estimatedKnownDurationGiB": 14.32,
+      "estimatedWithMedianImputationGiB": 14.57,
+      "estimatedPerFourMinuteVideoMiB": 17.2
+    },
+    {
+      "id": "480p",
+      "label": "480p",
+      "assumedKbps": 1100,
+      "estimatedKnownDurationGiB": 26.25,
+      "estimatedWithMedianImputationGiB": 26.71,
+      "estimatedPerFourMinuteVideoMiB": 31.5
+    },
+    {
+      "id": "720p",
+      "label": "720p",
+      "assumedKbps": 2800,
+      "estimatedKnownDurationGiB": 66.82,
+      "estimatedWithMedianImputationGiB": 67.99,
+      "estimatedPerFourMinuteVideoMiB": 80.1
+    },
+    {
+      "id": "1080p",
+      "label": "1080p",
+      "assumedKbps": 5000,
+      "estimatedKnownDurationGiB": 119.32,
+      "estimatedWithMedianImputationGiB": 121.4,
+      "estimatedPerFourMinuteVideoMiB": 143.1
+    }
+  ],
+  "assumptions": [
+    "yt-dlp sampling was attempted with worstvideo*+worstaudio/worst, but YouTube returned bot-check errors in this environment.",
+    "The estimate therefore uses total public-video duration and fixed combined audio+video bitrate assumptions.",
+    "The 16 public external-list additions have no duration metadata yet, so they are imputed with the median known duration."
+  ]
+}
