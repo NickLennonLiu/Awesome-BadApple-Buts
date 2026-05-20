@@ -16,6 +16,9 @@ type Summary = {
   sourceVideos: number;
   totalVideos: number;
   titleMatchedVideos: number;
+  butTitleVideos: number;
+  badAppleButVideos: number;
+  otherVideos: number;
   removedUnavailableVideos: number;
   sourcePlaylists: number;
   externalSourceVideos: number;
@@ -64,6 +67,7 @@ type Video = {
   playlistCount: number;
   playlistTitles: string[];
   titleMatchesBadApple: boolean;
+  titleHasBut: boolean;
   classificationConfidence: string;
   classificationStatus: string;
   classificationNotes: string;
@@ -89,7 +93,7 @@ const text = {
     eyebrow: "Bad Apple!! YouTube 快照",
     tagline: "来自公开播放列表的 Bad Apple!! 视频集合 — 按播放量、来源次数、时长浏览数百个复刻。",
     videoStat: "视频",
-    titleMatchStat: "标题匹配",
+    titleMatchStat: "But 正片",
     sourceStat: "来源列表",
     videosTab: "视频",
     aboutTab: "关于",
@@ -104,7 +108,7 @@ const text = {
     sortPlaylists: "来源次数",
     sortDuration: "时长",
     sortTitle: "标题",
-    onlyTitleMatches: "只看标题匹配",
+    onlyTitleMatches: "只看标题含 but",
     videosSuffix: "个视频",
     snapshotDate: "数据生成于",
     noResults: "没有符合条件的视频。",
@@ -131,7 +135,7 @@ const text = {
     eyebrow: "Bad Apple!! YouTube Snapshot",
     tagline: "A curated archive of Bad Apple!! videos from public playlists — browse hundreds of recreations by views, source frequency, and duration.",
     videoStat: "Videos",
-    titleMatchStat: "Title matches",
+    titleMatchStat: "But entries",
     sourceStat: "Source playlists",
     videosTab: "Videos",
     aboutTab: "About",
@@ -146,7 +150,7 @@ const text = {
     sortPlaylists: "Source frequency",
     sortDuration: "Duration",
     sortTitle: "Title",
-    onlyTitleMatches: "Title matches only",
+    onlyTitleMatches: "Title contains but",
     videosSuffix: "videos",
     snapshotDate: "Data generated",
     noResults: "No videos match the current filters.",
@@ -252,7 +256,8 @@ function compareVideos(left: Video, right: Video) {
   if (state.sort === "duration") return right.durationSeconds - left.durationSeconds;
   if (state.sort === "title") return left.title.localeCompare(right.title, state.language === "zh" ? "zh-CN" : "en-US");
   return (
-    Number(right.titleMatchesBadApple) - Number(left.titleMatchesBadApple) ||
+    Number(right.category === "bad_apple_but") - Number(left.category === "bad_apple_but") ||
+    Number(right.titleHasBut) - Number(left.titleHasBut) ||
     right.playlistCount - left.playlistCount ||
     right.viewCount - left.viewCount ||
     left.title.localeCompare(right.title, state.language === "zh" ? "zh-CN" : "en-US")
@@ -263,7 +268,7 @@ function filteredVideos() {
   const query = state.query.trim().toLowerCase();
   return state.videos
     .filter((video) => (state.category === "all" ? true : video.category === state.category))
-    .filter((video) => (state.onlyTitleMatches ? video.titleMatchesBadApple : true))
+    .filter((video) => (state.onlyTitleMatches ? video.titleHasBut : true))
     .filter((video) => (query ? searchable(video).includes(query) : true))
     .sort(compareVideos);
 }
@@ -295,7 +300,7 @@ function renderShell() {
         </div>
         <dl class="stats" aria-label="dataset statistics">
           <div><dt>${t("videoStat")}</dt><dd>${numberFormatter().format(state.summary.totalVideos)}</dd></div>
-          <div><dt>${t("titleMatchStat")}</dt><dd>${numberFormatter().format(state.summary.titleMatchedVideos)}</dd></div>
+          <div><dt>${t("titleMatchStat")}</dt><dd>${numberFormatter().format(state.summary.badAppleButVideos)}</dd></div>
           <div><dt>${t("sourceStat")}</dt><dd>${numberFormatter().format(state.summary.sourcePlaylists)}</dd></div>
         </dl>
       </div>
@@ -490,7 +495,7 @@ function renderAboutPage() {
       </div>
       <div class="about-facts">
         <div><span>${t("videoStat")}</span><strong>${numberFormatter().format(state.summary.totalVideos)}</strong></div>
-        <div><span>${t("titleMatchStat")}</span><strong>${numberFormatter().format(state.summary.titleMatchedVideos)}</strong></div>
+        <div><span>${t("titleMatchStat")}</span><strong>${numberFormatter().format(state.summary.badAppleButVideos)}</strong></div>
         <div><span>${t("sourceStat")}</span><strong>${numberFormatter().format(state.summary.sourcePlaylists)}</strong></div>
       </div>
     </section>

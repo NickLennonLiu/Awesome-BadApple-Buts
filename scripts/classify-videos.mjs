@@ -8,7 +8,7 @@ const videosPath = path.join(root, "data", "bad-apple-youtube", "videos.json");
 const externalSourcesPath = path.join(root, "data", "external-awesome-sources.json");
 const externalOembedPath = path.join(root, "data", "external-awesome-oembed.json");
 
-const categories = ["software", "hardware", "audio", "real_world", "animation", "meta", "unclassified"];
+const categories = ["bad_apple_but", "other"];
 
 const previousCategoryMap = {
   software_platform: "software",
@@ -26,6 +26,34 @@ const legacyTagMap = Object.fromEntries(
     category
   ])
 );
+
+const presentationCategoryTags = {
+  software: "format-software",
+  hardware: "format-hardware",
+  audio: "format-audio",
+  real_world: "format-real-world",
+  animation: "format-animation",
+  meta: "format-meta",
+  unclassified: "format-unclassified",
+  software_platform: "format-software",
+  game_or_game_engine: "format-software",
+  hardware_physical: "format-hardware",
+  ai_or_voice_cover: "format-audio",
+  fandom_animation: "format-animation",
+  meta_compilation: "format-meta",
+  other_recreation: "format-animation"
+};
+
+const strongAudioPattern =
+  /\b(ai cover|cover|metal cover|rock cover|english cover|orchestral arrangement|arrangement|instrumental|vocal|vocals|voice(?! channel)|sung|singing|sings|whistling|feat\.|ft\.|midi|soundfont|sounds? like|made from .* sounds|death sound|beats? (1|2|3|4|5|are|is|missing|swapped)|wrong drop|sad and emotional)\b|歌って|歌わせ|翻唱/i;
+const otherIpPattern =
+  /\b(tf2|team fortress|fnf|friday night funkin|undertale|deltarune|omori|evangelion|sonic|boyfriend|ruv|zavodila|vocaloids?|vocaloid|miku|project sekai|sekai)\b|初音ミク/i;
+const derivativeWorkPattern =
+  /\b(animated it from memory|roblox animation|mmd|sfx|lyrics are describing|full version|not bad|shitpost|epstein files|astronaut in the ocean|it's bad apple|its bad apple|it is bad apple|just apples|never starts|trying my best|reimu just|megalovania|steamboat willie|whitty|blob opera|vib-ribbon)\b/i;
+const compilationPattern =
+  /\b(compilation|playlist|every version|all versions|different versions|100 versions|versions? .* at once|every line .* switches|engine changes|side[- ]?by[- ]?side|comparison)\b/i;
+const presentationPattern =
+  /\b(played|playing|on a|on an|on the|on my|inside|made (of|from|with|in)|using|rendered|drawn|through|via|as|with|only subtitles|captions|console|world|display|screen|calculator|printer|keyboard|desmos|minecraft|roblox|discord|windows|vs ?code|github|google sheets|css|algorithm|simulation|fourier|prime|ascii|qr code|barcode|paintings|rubik|chess|clock|cloud|grass|spaghetti|lego|cubes|laser|tesla|e[- ]?ink|plasma|oscilloscope|cat piano|drum calculator|fluid)\b/i;
 
 const ruleSets = [
   {
@@ -149,18 +177,90 @@ function bestReferenceTitle(refs) {
   return refs.find((ref) => ref.link_role === "primary")?.title || refs[0]?.title || "";
 }
 
-function externalCategoryScores(refs) {
-  const scores = Object.fromEntries(categories.map((category) => [category, 0]));
-  for (const ref of refs.filter((item) => item.link_role === "primary")) {
-    if (ref.source_category && ref.source_category !== "unclassified") {
-      scores[ref.source_category] += 4;
-    }
+function titleHasBadApple(title) {
+  return /bad\s*apple/i.test(title);
+}
+
+function titleHasBut(title) {
+  return /\bbut\b/i.test(title);
+}
+
+function badAppleAppearsBeforeBut(title) {
+  const badAppleMatch = /bad\s*apple/i.exec(title);
+  const butMatch = /\bbut\b/i.exec(title);
+  return Boolean(badAppleMatch && butMatch && badAppleMatch.index < butMatch.index);
+}
+
+function decideTopLevelCategory(title) {
+  const hasBadApple = titleHasBadApple(title);
+  const hasBut = titleHasBut(title);
+  const badAppleBeforeBut = badAppleAppearsBeforeBut(title);
+  const hasPresentationSignal = presentationPattern.test(title);
+  const isAudioOnly = strongAudioPattern.test(title);
+  const isOtherIp = otherIpPattern.test(title);
+  const isDerivativeWork = derivativeWorkPattern.test(title);
+  const isCompilation = compilationPattern.test(title);
+  const tags = [];
+  const notes = [];
+
+  if (hasBadApple) tags.push("bad-apple-title");
+  if (hasBut) tags.push("title-but");
+  if (badAppleBeforeBut) tags.push("bad-apple-before-but");
+  if (hasPresentationSignal) tags.push("presentation-form");
+  if (isAudioOnly) tags.push("audio-only");
+  if (isOtherIp) tags.push("other-ip");
+  if (isDerivativeWork) tags.push("derivative-work");
+  if (isCompilation) tags.push("compilation-meta");
+
+  if (!hasBadApple) notes.push('Title does not explicitly contain "Bad Apple".');
+  if (!hasBut) notes.push('Title does not explicitly contain the word "but".');
+  if (hasBadApple && hasBut && !badAppleBeforeBut) {
+    notes.push('"Bad Apple" is not the subject before "but"; treat it as a reference rather than a Bad Apple But entry.');
   }
-  return scores;
+  if (isAudioOnly) notes.push("Looks like a cover, vocal, arrangement, or other audio-first entry.");
+  if (isOtherIp) notes.push("Looks like another IP, character, anime, or game fandom derivative.");
+  if (isDerivativeWork) notes.push("Looks like a derivative edit rather than a distinct presentation surface.");
+  if (isCompilation) notes.push("Looks like a compilation, version-switching, or meta edit.");
+  if (hasBadApple && hasBut && badAppleBeforeBut && !hasPresentationSignal) tags.push("no-presentation-signal");
+
+  const category =
+    hasBadApple &&
+    hasBut &&
+    badAppleBeforeBut &&
+    !isAudioOnly &&
+    !isOtherIp &&
+    !isDerivativeWork &&
+    !isCompilation
+      ? "bad_apple_but"
+      : "other";
+  const confidence =
+    category === "bad_apple_but"
+      ? hasPresentationSignal
+        ? "high"
+        : "medium"
+      : hasBut && hasBadApple
+        ? "medium"
+        : "high";
+  const status = "auto";
+
+  if (category === "bad_apple_but") {
+    tags.push("bad-apple-but");
+  } else {
+    tags.push("other-bad-apple");
+  }
+
+  return {
+    category,
+    confidence,
+    status,
+    tags,
+    notes,
+    title_has_but: hasBut ? "yes" : "",
+    title_matches_bad_apple: hasBadApple ? "yes" : ""
+  };
 }
 
 function classify(video, refs) {
-  const scores = Object.fromEntries(categories.map((category) => [category, 0]));
   const incomingTags = splitList(video.tags).map(normalizeTag);
   const tags = new Set(incomingTags.filter((tag) => tag.startsWith("legacy-")));
   const notes = [];
@@ -173,78 +273,46 @@ function classify(video, refs) {
   ]
     .join(" ")
     .toLowerCase();
+  const title = String(video.title || "");
+  const topLevel = decideTopLevelCategory(title);
+  topLevel.tags.forEach((tag) => tags.add(tag));
 
   for (const tag of incomingTags) {
     const legacyCategory = tag.replaceAll("-", "_");
     if (previousCategoryMap[legacyCategory]) {
       tags.add(`legacy-${tag}`);
     }
+    if (tag.startsWith("format-")) {
+      tags.add(tag);
+    }
   }
 
-  const previous = previousCategoryMap[video.category];
-  const legacyFromTags = [...tags].map((tag) => legacyTagMap[tag]).find(Boolean);
-  if (previous || legacyFromTags) {
-    scores[previous || legacyFromTags] += 4;
-  }
+  const previous = presentationCategoryTags[video.category] || presentationCategoryTags[previousCategoryMap[video.category]];
   if (previous) {
+    tags.add(previous);
     tags.add(`legacy-${video.category.replaceAll("_", "-")}`);
   }
 
-  const sourceScores = externalCategoryScores(refs);
-  for (const category of categories) {
-    scores[category] += sourceScores[category] || 0;
-  }
   if (refs.some((ref) => ref.link_role === "primary")) {
     tags.add("awesome-list");
     for (const ref of refs.filter((item) => item.link_role === "primary")) {
       tags.add(normalizeTag(ref.source_section));
       tags.add(normalizeTag(ref.source_repo.split("/")[0]));
+      if (presentationCategoryTags[ref.source_category]) {
+        tags.add(presentationCategoryTags[ref.source_category]);
+      }
     }
   }
 
   for (const ruleSet of ruleSets) {
-    let matched = false;
     for (const [tag, pattern] of ruleSet.tags) {
       if (pattern.test(text)) {
-        matched = true;
         tags.add(tag);
       }
     }
-    if (matched) {
-      scores[ruleSet.category] += ruleSet.weight;
-    }
   }
 
-  if (/\bminecraft\b/i.test(text)) {
-    scores.software += 5;
-    scores.real_world -= 2;
-  }
-  if (/fourier|prime number|qr code|ascii|shader|renderer/i.test(text)) {
-    scores.software += 4;
-    scores.real_world -= 3;
-  }
-  if (/piano|violin|guitar|bass|drum|koto|shamisen|cover|orchestral|midi|feat\.|miku|初音ミク/i.test(text)) {
-    scores.audio += 4;
-  }
-  if (/e[- ]?ink|display|smartwatch|apple \/\/e|dezaemon|snes|keyboard|plasma|tesla|laser|oscilloscope/i.test(text)) {
-    scores.hardware += 4;
-  }
-
-  let category = categories
-    .filter((item) => item !== "unclassified")
-    .sort((left, right) => scores[right] - scores[left])[0];
-  const confidenceScore = scores[category] || 0;
-  if (!confidenceScore || confidenceScore < 3) {
-    category = "unclassified";
-  }
-
-  const confidence = category === "unclassified" ? "low" : confidenceScore >= 10 ? "high" : "medium";
-  if (category === "unclassified") {
-    notes.push("Automatic rules did not find a strong category signal.");
-  }
-  if (video.title_matches_bad_apple !== "yes") {
-    notes.push("Title does not explicitly contain Bad Apple; keep for review.");
-  }
+  notes.push(...topLevel.notes);
   if (video.external_only === "yes") {
     notes.push("Added from an external awesome list; full YouTube metadata still needs refresh.");
   }
@@ -253,11 +321,13 @@ function classify(video, refs) {
   }
 
   return {
-    category,
+    category: topLevel.category,
     tags: unique([...tags].map(normalizeTag)).sort(),
-    classification_confidence: confidence,
-    classification_status: category === "unclassified" || notes.length ? "needs_review" : "auto",
-    classification_notes: notes.join(" ")
+    classification_confidence: topLevel.confidence,
+    classification_status: notes.length ? topLevel.status : "auto",
+    classification_notes: unique(notes).join(" "),
+    title_has_but: topLevel.title_has_but,
+    title_matches_bad_apple: topLevel.title_matches_bad_apple
   };
 }
 
@@ -340,6 +410,8 @@ for (const video of videos) {
   video.classification_confidence = result.classification_confidence;
   video.classification_status = result.classification_status;
   video.classification_notes = result.classification_notes;
+  video.title_has_but = result.title_has_but;
+  video.title_matches_bad_apple = result.title_matches_bad_apple;
 }
 
 videos.sort((left, right) => {

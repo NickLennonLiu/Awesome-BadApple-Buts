@@ -32,6 +32,7 @@ type Video = {
   playlistCount: number;
   playlistTitles: string[];
   titleMatchesBadApple: boolean;
+  titleHasBut: boolean;
   classificationConfidence: string;
   classificationStatus: string;
   classificationNotes: string;

@@ -1,55 +1,30 @@
 {
-  "generatedAt": "2026-05-16T04:26:23.348Z",
+  "generatedAt": "2026-05-20T10:09:12.232Z",
   "sourceVideos": 938,
   "totalVideos": 890,
-  "titleMatchedVideos": 840,
+  "titleMatchedVideos": 851,
+  "butTitleVideos": 292,
+  "badAppleButVideos": 229,
+  "otherVideos": 661,
   "removedUnavailableVideos": 48,
   "sourcePlaylists": 16,
   "externalSourceVideos": 74,
   "externalOnlyVideos": 16,
-  "needsReviewVideos": 52,
+  "needsReviewVideos": 0,
   "categories": [
     {
-      "id": "animation",
-      "label": "动画与同人",
-      "labelZh": "动画与同人",
-      "labelEn": "Animation and fandom",
-      "count": 447
+      "id": "other",
+      "label": "其他 Bad Apple 相关",
+      "labelZh": "其他 Bad Apple 相关",
+      "labelEn": "Other Bad Apple-related",
+      "count": 661
     },
     {
-      "id": "software",
-      "label": "软件",
-      "labelZh": "软件",
-      "labelEn": "Software",
-      "count": 179
-    },
-    {
-      "id": "audio",
-      "label": "音频",
-      "labelZh": "音频",
-      "labelEn": "Audio",
-      "count": 141
-    },
-    {
-      "id": "hardware",
-      "label": "硬件",
-      "labelZh": "硬件",
-      "labelEn": "Hardware",
-      "count": 94
-    },
-    {
-      "id": "meta",
-      "label": "合辑与元玩法",
-      "labelZh": "合辑与元玩法",
-      "labelEn": "Compilations and meta",
-      "count": 20
-    },
-    {
-      "id": "real_world",
-      "label": "现实物体",
-      "labelZh": "现实物体",
-      "labelEn": "Real-world objects",
-      "count": 9
+      "id": "bad_apple_but",
+      "label": "Bad Apple But",
+      "labelZh": "Bad Apple But",
+      "labelEn": "Bad Apple But",
+      "count": 229
     }
   ]
 }
