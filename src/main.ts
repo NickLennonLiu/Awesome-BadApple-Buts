@@ -88,6 +88,8 @@ const fallbackThumbnail =
     <path d="M297 151c-81 0-144 61-144 151 0 78 52 133 112 133 27 0 38-16 55-16s29 16 55 16c62 0 112-66 112-143 0-83-57-141-136-141-20 0-38 8-54 8Z" fill="#f5f7fb"/>
   </svg>`);
 
+const githubRepoUrl = "https://github.com/NickLennonLiu/Awesome-BadApple-Buts";
+
 const text = {
   zh: {
     videoStat: "视频",
@@ -114,6 +116,7 @@ const text = {
     loadErrorTitle: "数据加载失败",
     unpublished: "未公开",
     languageLabel: "语言",
+    githubLabel: "打开 GitHub 仓库",
     aboutTitle: "关于这个视频库",
     aboutIntro:
       "这个网站展示的是从公开 YouTube 播放列表快照中整理出的 Bad Apple!! 相关视频。原始采集以播放列表为入口，去重后保留公开视频，并过滤私密、删除或不可用的占位条目。",
@@ -153,6 +156,7 @@ const text = {
     loadErrorTitle: "Failed to load data",
     unpublished: "Unavailable",
     languageLabel: "Language",
+    githubLabel: "Open GitHub repository",
     aboutTitle: "About This Gallery",
     aboutIntro:
       "This site presents Bad Apple!! related videos collected from public YouTube playlist snapshots. The collection starts from playlists, deduplicates videos, keeps public entries, and filters out private, deleted, or unavailable placeholders.",
@@ -283,9 +287,16 @@ function renderShell() {
         <h1>Awesome BadApple Buts</h1>
       </div>
       <div class="header-actions">
-        <div class="language-switch" role="group" aria-label="${t("languageLabel")}">
-          <button class="${state.language === "zh" ? "active" : ""}" data-language="zh" type="button">中文</button>
-          <button class="${state.language === "en" ? "active" : ""}" data-language="en" type="button">EN</button>
+        <div class="header-tools">
+          <div class="language-switch" role="group" aria-label="${t("languageLabel")}">
+            <button class="${state.language === "zh" ? "active" : ""}" data-language="zh" type="button">中文</button>
+            <button class="${state.language === "en" ? "active" : ""}" data-language="en" type="button">EN</button>
+          </div>
+          <a class="repo-link" href="${githubRepoUrl}" target="_blank" rel="noreferrer" aria-label="${t("githubLabel")}" title="${t("githubLabel")}">
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.06 11.06 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z" />
+            </svg>
+          </a>
         </div>
         <dl class="stats" aria-label="dataset statistics">
           <div><dt>${t("videoStat")}</dt><dd>${numberFormatter().format(state.summary.totalVideos)}</dd></div>

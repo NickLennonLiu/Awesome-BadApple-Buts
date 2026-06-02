@@ -181,6 +181,46 @@ h1 {
   min-width: 0;
 }
 
+.header-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: end;
+}
+
+.repo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.repo-link:hover,
+.repo-link:focus-visible {
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.repo-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.repo-link svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
 .language-switch {
   display: inline-flex;
   justify-self: end;
