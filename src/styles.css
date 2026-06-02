@@ -126,7 +126,7 @@ select {
 .app-header .brand {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   min-width: 0;
 }
 
@@ -142,55 +142,17 @@ select {
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #1a1b25, #0c0d14);
+  border-radius: 10px;
+  background: #f7f5f7;
   border: 1px solid var(--border-strong);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 6px 16px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
-.brand-mark .silhouette svg {
-  width: 26px;
-  height: 26px;
-}
-
-.brand-mark .silhouette .stem {
-  fill: var(--accent);
-}
-
-.brand-mark .silhouette .body {
-  fill: #f5f6fa;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  border: 1px solid rgba(255, 59, 92, 0.32);
-  color: #ffd1d9;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  width: fit-content;
-}
-
-.eyebrow::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(255, 59, 92, 0.2);
-  animation: pulse 1.8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.92); }
+.brand-mark .silhouette img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 h1,
@@ -210,14 +172,6 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-
-.tagline {
-  margin: 6px 0 0;
-  max-width: 540px;
-  color: var(--text-muted);
-  font-size: 14.5px;
-  line-height: 1.55;
 }
 
 .header-actions {

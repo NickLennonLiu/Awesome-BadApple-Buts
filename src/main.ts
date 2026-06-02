@@ -90,8 +90,6 @@ const fallbackThumbnail =
 
 const text = {
   zh: {
-    eyebrow: "Bad Apple!! YouTube 快照",
-    tagline: "来自公开播放列表的 Bad Apple!! 视频集合 — 按播放量、来源次数、时长浏览数百个复刻。",
     videoStat: "视频",
     titleMatchStat: "But 正片",
     sourceStat: "来源列表",
@@ -132,8 +130,6 @@ const text = {
     footerNote: "© Awesome BadApple Buts"
   },
   en: {
-    eyebrow: "Bad Apple!! YouTube Snapshot",
-    tagline: "A curated archive of Bad Apple!! videos from public playlists — browse hundreds of recreations by views, source frequency, and duration.",
     videoStat: "Videos",
     titleMatchStat: "But entries",
     sourceStat: "Source playlists",
@@ -183,7 +179,7 @@ const state = {
   category: "all",
   sort: "featured" as SortMode,
   onlyTitleMatches: false,
-  language: "zh" as Language,
+  language: "en" as Language,
   page: "videos" as Page
 };
 
@@ -283,15 +279,10 @@ function renderShell() {
       <div class="brand">
         <div class="brand-mark">
           <span class="silhouette" aria-hidden="true">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path class="stem" d="M35 12c-3 2-5 5-5 9 5 0 9-4 9-9h-4Z" />
-              <path class="body" d="M30 21c-9 0-16 7-16 17 0 9 6 15 13 15 3 0 4-2 6-2s3 2 6 2c7 0 11-8 11-16 0-9-6-16-15-16-2 0-4 1-5 1Z" />
-            </svg>
+            <img src="./favicon.png" alt="" />
           </span>
-          <p class="eyebrow">${t("eyebrow")}</p>
         </div>
         <h1>Awesome BadApple Buts</h1>
-        <p class="tagline">${t("tagline")}</p>
       </div>
       <div class="header-actions">
         <div class="language-switch" role="group" aria-label="${t("languageLabel")}">
