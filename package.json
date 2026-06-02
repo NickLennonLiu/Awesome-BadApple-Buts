@@ -17,29 +17,5 @@
     "typescript": "^5.9.3",
     "vite": "^7.2.7"
   },
-  "description": "> A curated list of Bad Apple!! recreations, covers, ports, demos, and \"played on everything\" experiments.",
-  "main": "index.js",
-  "dependencies": {
-    "esbuild": "^0.27.7",
-    "fdir": "^6.5.0",
-    "fsevents": "^2.3.3",
-    "nanoid": "^3.3.12",
-    "picocolors": "^1.1.1",
-    "picomatch": "^4.0.4",
-    "postcss": "^8.5.14",
-    "rollup": "^4.60.4",
-    "source-map-js": "^1.2.1",
-    "tinyglobby": "^0.2.16"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NickLennonLiu/Bad-Apple-Buts.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NickLennonLiu/Bad-Apple-Buts/issues"
-  },
-  "homepage": "https://github.com/NickLennonLiu/Bad-Apple-Buts#readme"
+  "license": "CC0-1.0"
 }
