@@ -1,8 +1,8 @@
-# Awesome Bad Apple But [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+# Awesome BadApple Buts [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 > A curated list of Bad Apple videos that play, render, perform, or reinterpret the song through unusual software, hardware, interfaces, algorithms, media, and objects.
 
-[Browse the gallery](http://blog.river9.top/Bad-Apple-Buts/) · [Review classifications](http://blog.river9.top/Bad-Apple-Buts/classify.html) · [Open dataset](public/data/videos.json) · [Suggest an entry](contributing.md)
+[Browse the gallery](https://blog.river9.top/Awesome-BadApple-Buts/) · [Review classifications](https://blog.river9.top/Awesome-BadApple-Buts/classify.html) · [Open dataset](public/data/videos.json) · [Suggest an entry](contributing.md)
 
 ## Contents
 

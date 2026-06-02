@@ -129,7 +129,7 @@ const text = {
     playlistViewsLabel: "播放列表观看",
     openPlaylist: "打开播放列表",
     footerCredit: "由公开 YouTube 数据构建",
-    footerNote: "© Bad Apple But"
+    footerNote: "© Awesome BadApple Buts"
   },
   en: {
     eyebrow: "Bad Apple!! YouTube Snapshot",
@@ -171,7 +171,7 @@ const text = {
     playlistViewsLabel: "Playlist views",
     openPlaylist: "Open playlist",
     footerCredit: "Built from public YouTube data",
-    footerNote: "© Bad Apple But"
+    footerNote: "© Awesome BadApple Buts"
   }
 } satisfies Record<Language, Record<string, string>>;
 
@@ -290,7 +290,7 @@ function renderShell() {
           </span>
           <p class="eyebrow">${t("eyebrow")}</p>
         </div>
-        <h1>Bad Apple But</h1>
+        <h1>Awesome BadApple Buts</h1>
         <p class="tagline">${t("tagline")}</p>
       </div>
       <div class="header-actions">

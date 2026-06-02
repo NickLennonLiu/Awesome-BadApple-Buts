@@ -242,7 +242,7 @@ function renderShell() {
   app.innerHTML = `
     <header class="classify-header">
       <div>
-        <a class="back-link" href="./index.html">Bad Apple But</a>
+        <a class="back-link" href="./index.html">Awesome BadApple Buts</a>
         <h1>分类标注台</h1>
       </div>
       <dl class="classify-stats">
