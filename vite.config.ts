@@ -8,8 +8,7 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        main: fileURLToPath(new URL("./index.html", import.meta.url)),
-        classify: fileURLToPath(new URL("./classify.html", import.meta.url))
+        main: fileURLToPath(new URL("./index.html", import.meta.url))
       }
     }
   }

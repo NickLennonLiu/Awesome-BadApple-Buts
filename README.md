@@ -2,7 +2,7 @@
 
 > A curated list of Bad Apple videos that play, render, perform, or reinterpret the song through unusual software, hardware, interfaces, algorithms, media, and objects.
 
-[Browse the gallery](https://abab.river9.top/) · [Review classifications](https://abab.river9.top/classify.html) · [Open dataset](public/data/videos.json) · [Suggest an entry](contributing.md)
+[Browse the gallery](https://abab.river9.top/) · [Open dataset](public/data/videos.json) · [Suggest an entry](contributing.md)
 
 ## Contents
 
